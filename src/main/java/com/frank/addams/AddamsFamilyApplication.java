@@ -174,7 +174,11 @@ public class AddamsFamilyApplication {
                 String borderIcon = Emogis.TELEVISION;
 
                 System.out.println("\n"+ (borderIcon + " ").repeat(13)) ;
-                for (Person anAddams : theAddamsFamily) {
+//                for (Person anAddams : theAddamsFamily) {
+                Iterator<Person> personIterator = theAddamsFamily.iterator();
+                while(personIterator.hasNext()){
+                    Person anAddams = personIterator.next();
+
                     personCount++;
                     System.out.printf("%s %2d. %-30s %-8s",borderIcon,personCount,anAddams.getName(),borderIcon);
                     if (personCount != theAddamsFamily.size()) {
@@ -199,7 +203,10 @@ public class AddamsFamilyApplication {
                 System.out.println("\nNumber of Addams' found containing " + whatTheyWant.getSearchValue() + " in name: " + listOfAddams.size());
 
                 // Loop through extracted entries and display them one at a time
-                for(Person anAddams : listOfAddams) {
+                Iterator<Person> personIterator = theAddamsFamily.iterator();
+                while(personIterator.hasNext()){
+                    Person anAddams = personIterator.next();
+//                for(Person anAddams : listOfAddams) {
                     System.out.printf("%10d %-30s\n",anAddams.getId(),anAddams.getName());
                 }
         }
@@ -217,7 +224,10 @@ public class AddamsFamilyApplication {
                 listOfAddams = findAnAddamsByName(whatTheyWant.getSearchValue().strip(),whatTheyWant.isCaseSensitiveSearch());
 
                 // Loop through extracted entries, display each one and ask for new values
-                for(Person anAddams : listOfAddams) {
+//                for(Person anAddams : listOfAddams) {
+                Iterator<Person> personIterator = listOfAddams.iterator();
+                while (personIterator.hasNext()) {
+                        Person anAddams = personIterator.next();
                         // Show user the current name from extracted entries
                         System.out.println("Found: " + anAddams);
 
@@ -251,7 +261,10 @@ public class AddamsFamilyApplication {
                 aListOfAddams = findAnAddamsByName(whatTheyWant.getSearchValue().strip(), whatTheyWant.isCaseSensitiveSearch());
 
                 // Loop through extracted entries, display each one and ask if user wants to delete it
-                for (Person anAddams : aListOfAddams) {
+//                for (Person anAddams : aListOfAddams) {
+                Iterator<Person> anotherItterator = aListOfAddams.iterator();
+                while (anotherItterator.hasNext()){
+                        Person anAddams = anotherItterator.next();
                         // Show user the current entry from extracted entries
                         System.out.println("Found: " + anAddams);
 
@@ -261,7 +274,8 @@ public class AddamsFamilyApplication {
 
                         if (deleteResponse.startsWith("Y")) {             // If user wants to delete entry...
                                 if (theAddamsFamily.remove(anAddams)) {   //    remove it from the data structure
-                                    aListOfAddams.remove(anAddams);       //       and from the extracted entries
+//                                    aListOfAddams.remove(anAddams);       //       and from the extracted entries
+                                    anotherItterator.remove();
                                     System.out.println("----- Removal of " + anAddams.getName() + " was successful");
                                 } else {                                  // if user does not want to delete entry...
                                     System.out.println("----- Removal of " + anAddams.getName() + " failed");
@@ -378,7 +392,10 @@ public class AddamsFamilyApplication {
          ********************************************************************************************/
         public void displayAllInReverseOrder() {
                 // TODO: Add code to implement this feature
-                System.out.println("\n" + "-".repeat(60) +"\n----- Sorry, this feature has not been implemented yet -----\n"
-                                                         + "-".repeat(60) + "\n");
+                ListIterator<Person> aListIterator = theAddamsFamily.listIterator(theAddamsFamily.size());
+                while (aListIterator.hasPrevious()){
+                    Person aPerson = aListIterator.previous();
+                    System.out.println(aPerson);
+                }
         }
 } // End of ApplicationProgram class
